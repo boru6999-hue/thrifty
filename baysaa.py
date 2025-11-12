@@ -90,7 +90,7 @@ def detect_and_read_plate(img_path):
 
 # 🚀 Жишээ ашиглалт
 if __name__ == "__main__":
-    image_path = "car_plate.jpg"  # ← Энд өөрийн зургийн замыг оруулна
+    image_path = "images.jpeg"  # ← Энд өөрийн зургийн замыг оруулна
     result = detect_and_read_plate(image_path)
     if result:
         print(f"✅ Танигдсан дугаар: **{result}**")
