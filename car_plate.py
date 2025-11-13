@@ -59,7 +59,7 @@ while True:
             print("\n⚠️  Дугаар олдсонгүй! Дахин оролдоно уу.")
         else:
             print(f"\n{'='*60}")
-            print(f"✅ {len(plates)} дугаар илэрлээ!")
+            print(f" {len(plates)} дугаар илэрлээ!")
             print('='*60)
 
             for i, (x, y, w, h) in enumerate(plates):
@@ -78,10 +78,10 @@ while True:
                     if text:
                         print(f"\n🚗 Дугаар #{i+1}: {text}")
                     else:
-                        print(f"\n⚠️  Дугаар #{i+1}: Танигдсангүй")
+                        print(f"\ns  Дугаар #{i+1}: Танигдсангүй")
                         text = "Unknown"
                 except Exception as e:
-                    print(f"\n❌ Алдаа гарлаа: {e}")
+                    print(f"\n Алдаа гарлаа: {e}")
                     text = "Error"
 
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
