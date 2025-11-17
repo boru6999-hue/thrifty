@@ -361,73 +361,13 @@ def main():
                     
                     # Зурах
                     if text:
-                        frame = detector.draw_detection(frame, x, y, w, h, text, conf)
-            
-            # Хүснэгт
-            frame = detector.draw_simple_table(frame)
-            
-            # Статус мэдээлэл
-            h_frame = frame.shape[0]
-            
-            # Дэвсгэр
-            cv2.rectangle(frame, (5, h_frame-65), (380, h_frame-5), (30, 30, 30), -1)
-            
-            # FPS
-            cv2.putText(frame, f"FPS: {fps_display:.1f}", (10, h_frame-45), 
-                       cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 100), 2)
-            
-            # Progress
-            progress = (frame_count / total_frames) * 100
-            cv2.putText(frame, f"Progress: {progress:.1f}%", (10, h_frame-15), 
-                       cv2.FONT_HERSHEY_SIMPLEX, 0.6, (100, 200, 255), 2)
-            
-            # Frame number
-            cv2.putText(frame, f"Frame: {frame_count}/{total_frames}", (200, h_frame-45), 
-                       cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 200, 200), 1)
-        
-        # Харуулах
-        cv2.imshow('Video Plate Detection', frame)
-        
-        # Товчлуур
-        key = cv2.waitKey(1) & 0xFF
-        
-        if key == ord('q') or key == ord('Q'):
-            print("\n🛑 Хэрэглэгч зогсоосон")
-            break
-        elif key == ord(' '):
-            paused = not paused
-            status = "⏸️  ЗОГСООСОН" if paused else "▶️  ҮРГЭЛЖИЛЖ БАЙНА"
-            print(f"\n{status}")
-        elif key == ord('s') or key == ord('S'):
-            # Screenshot
-            screenshot_file = os.path.join(detector.save_folder, 
-                                          f"screenshot_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg")
-            cv2.imwrite(screenshot_file, frame)
-            print(f"📸 Screenshot: {os.path.basename(screenshot_file)}")
-    
-    # Цэвэрлэх
-    cap.release()
-    cv2.destroyAllWindows()
-    
-    # Тайлан
-    print("\n" + "="*70)
-    print(" "*25 + "📊 ДҮГНЭЛТ")
-    print("="*70)
-    print(f"Нийт frames: {total_frames}")
-    print(f"Боловсруулсан: {processing_count}")
-    print(f"Танигдсан дугаар: {len(detector.detected_plates)}")
-    
-    if detector.detected_plates:
-        print(f"\n📋 Бүх дугаарууд:")
-        for i, det in enumerate(detector.detected_plates, 1):
-            print(f"  {i}. {det['plate']} ({det['confidence']:.0f}%) - {det['time'].strftime('%H:%M:%S')}")
-        
-        avg_conf = sum(d['confidence'] for d in detector.detected_plates) / len(detector.detected_plates)
-        print(f"\nДундаж confidence: {avg_conf:.1f}%")
-    
-    print(f"\n💾 Файлууд хадгалагдсан: {detector.save_folder}/")
-    print("\n👋 Баяртай!")
-    print("="*70 + "\n")
+                        print(f"\n🚗 Дугаар #{i+1}: {text}")
+                    else:
+                        print(f"\ns  Дугаар #{i+1}: Танигдсангүй")
+                        text = "Unknown"
+        except Exception as e:
+    print(f"\n Алдаа гарлаа: {e}")
+text = "Error"
 
 if __name__ == "__main__":
     main()
